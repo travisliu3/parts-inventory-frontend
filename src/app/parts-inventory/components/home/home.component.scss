@@ -1,0 +1,30 @@
+.welcome-container {
+  text-align: center;
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.welcome-container h1 {
+  margin: 0 0 20px;
+  font-size: 2.5em;
+  color: #333;
+}
+.welcome-container p {
+  margin: 0 0 20px;
+  color: #666;
+  font-size: 1.2em;
+}
+.welcome-container a {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+.welcome-container a:hover {
+  background-color: #0056b3;
+}

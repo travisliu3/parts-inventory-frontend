@@ -1,0 +1,95 @@
+@import '../theme';
+@import '../abstracts/variables';
+.vertical-padding {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
+
+.reset-cursor {
+  cursor: default;
+}
+
+.security-content-padding {
+  padding: $large-font-size;
+}
+
+.remove-top-padding {
+  padding-top: 0;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.securityImportantText {
+  color: mat-color($security-app-primary);
+}
+
+.noOverflow,
+.noOverflow .mat-checkbox-layout {
+  white-space: normal;
+}
+
+.margin-left-medium {
+  margin-left: 1.75em;
+}
+
+.securityBold {
+  font-weight: bold;
+}
+
+.full-width {
+  width: 100%;
+}
+
+@media print {
+  body,
+  html {
+    height: auto !important;
+    width: 100% !important;
+
+    overflow: hidden !important;
+  }
+  table {
+    /* Or specify a table class */
+    max-height: 100% !important;
+    overflow: hidden !important;
+    page-break-after: always !important;
+  }
+
+  button {
+    display: none !important;
+  }
+
+  .mat-horizontal-stepper-header-container {
+    display: none !important;
+  }
+  .intro {
+    display: none !important;
+  }
+  .sub-header__title {
+    display: none !important;
+  }
+  .app-number-container {
+    justify-content: flex-end !important;
+  }
+
+  mat-toolbar {
+    display: none !important;
+  }
+  .security-card-content {
+    max-width: 100% !important;
+  }
+
+  .app-container {
+    max-width: 100% !important;
+  }
+
+  .card-header-container {
+    display: none !important;
+  }
+}

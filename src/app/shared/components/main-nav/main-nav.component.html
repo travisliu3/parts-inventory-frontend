@@ -1,0 +1,73 @@
+<div class="security-container" id="header">
+    <mat-toolbar class="security-header" color="primary" (click)="ToogleHeader()">
+      <mat-toolbar-row class="security-header-row">
+        <span class="header-left-item">
+          <div *ngIf="!(isHandset$ | async)">
+            <button
+              mat-icon-button
+              class="security-header-menu"
+              (click)="ToggleSideNav()"
+            >
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="isHandset$ | async">
+            <button
+              mat-icon-button
+              class="security-header-menu"
+              (click)="ToggleSideNav()"
+            >
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+        </span>
+        <div class="header-right-item"></div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="security-sidenav-container" autosize>
+      <mat-sidenav
+        #drawer
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="!(isHandset$ | async)"
+        [ngClass]="isExpanded ? 'sideNavExpanded' : 'sideNavCollapsed'"
+      >
+        <div>
+          <mat-nav-list *ngFor="let link of navLinks">
+            <mat-list-item
+              *ngIf="!showPanelItem(link, isExpanded)"
+              [ngClass]="isLinkActive(link.index)"
+              [routerLink]="link.link"
+              [routerLinkActive]="isLinkActive(link.index)"
+              matTooltip="{{ link.label }}"
+              matTooltipPosition="right"
+              [matTooltipDisabled]="isExpanded"
+            >
+              <mat-icon mat-list-icon>{{ link.iconName }}</mat-icon>
+              <span mat-line *ngIf="isExpanded">{{ link.label }}</span>
+            </mat-list-item>
+  
+            <mat-expansion-panel
+              class="mat-elevation-z0"
+              *ngIf="showPanelItem(link, isExpanded)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon mat-list-icon>{{ link.iconName }}</mat-icon>
+                  <div class="mat-padding-left">
+                    <span mat-line *ngIf="isExpanded">{{ link.label }}</span>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-nav-list>
+        </div>
+      </mat-sidenav>
+  
+      <mat-sidenav-content autosize>
+        <ng-content></ng-content>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  

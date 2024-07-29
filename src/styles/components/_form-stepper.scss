@@ -1,0 +1,31 @@
+@import '../theme';
+@import '../abstracts/mixins';
+@import '../abstracts/variables';
+app-form-stepper {
+  mat-horizontal-stepper {
+    overflow: hidden;
+  }
+  .mat-stepper-label-position-bottom,
+  .mat-horizontal-stepper-header,
+  .mat-step-label {
+    width: initial;
+    white-space: normal;
+    @include security-fonts-common($medium-font-weight, $small-font-size);
+  }
+  .mat-horizontal-stepper-header-container {
+    overflow-x: auto;
+  }
+  .mat-step-header {
+    overflow: visible;
+  }
+  mat-step-header,
+  .mat-step-header {
+    .mat-step-label.mat-step-label-active.mat-step-label-selected {
+      color: mat-color($security-app-primary);
+      @include security-fonts-common(600, $small-font-size);
+    }
+  }
+  .mat-step-text-label {
+    text-align: center;
+  }
+}

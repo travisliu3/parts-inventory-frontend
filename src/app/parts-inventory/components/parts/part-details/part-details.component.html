@@ -1,0 +1,67 @@
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <mat-form-field *ngIf="editForm.get('id')?.value" appearance="fill">
+    <mat-label>Part ID</mat-label>
+    <input matInput formControlName="id" readonly />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Part name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Part price</mat-label>
+    <input matInput formControlName="price" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Part stock</mat-label>
+    <input matInput formControlName="stock" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Part min</mat-label>
+    <input matInput formControlName="min" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Part max</mat-label>
+    <input matInput formControlName="max" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="type">
+      <mat-option value="InHouse">InHouse</mat-option>
+      <mat-option value="Outsourced">Outsourced</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="editForm.get('type')?.value === 'InHouse'">
+    <mat-form-field appearance="fill">
+      <mat-label>Machine ID</mat-label>
+      <input matInput formControlName="machineId" />
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="editForm.get('type')?.value === 'Outsourced'">
+    <mat-form-field appearance="fill">
+      <mat-label>Company Name</mat-label>
+      <input matInput formControlName="companyName" />
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Associated product name</mat-label>
+    <mat-select formControlName="product">
+      <mat-option *ngFor="let product of products" [value]="product">
+        {{ product }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="warn" type="button" (click)="onCancel()">
+    Cancel
+  </button>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>

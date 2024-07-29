@@ -1,0 +1,9 @@
+@mixin security-fonts-common($font-weight, $font-size) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+}
+
+@mixin reset-element-margin-padding($margin-value, $padding-value) {
+  margin: $margin-value;
+  padding: $padding-value;
+}

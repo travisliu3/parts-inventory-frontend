@@ -1,0 +1,50 @@
+<div fxLayout="row" fxLayoutAlign="center" FxFlexFill>
+  <mat-card
+    fxFlex="1 1 85%"
+    fxFlex.lt-md="95%"
+    fxLayoutAlign="center"
+    class="seneca-card"
+    fxFlexFill
+  >
+    <mat-card-content
+      *ngIf="!loading; else spin"
+      class="seneca-card-content"
+      fxLayout="column"
+      fxLayoutAlign="start center"
+      fxLayoutGap="2em"
+      fxFlexFill
+    >
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+        <h1>Page not found</h1>
+        <p>
+          Sorry, there is no web page matching your request. It is possible you
+          typed the address incorrectly, or that the page no longer exists.
+        </p>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center" fxFlexFill>
+        <mat-card-actions
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          fxFlex="70%"
+        >
+          <button
+            (click)="redirect()"
+            mat-raised-button
+            color="primary"
+            fxFlex="1 1 50%"
+          >
+            {{ buttonText }}
+          </button>
+        </mat-card-actions>
+      </div>
+    </mat-card-content>
+
+    <ng-template #spin>
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2em">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        <h3>Loading User Information. Please Wait</h3>
+      </div>
+    </ng-template>
+  </mat-card>
+</div>

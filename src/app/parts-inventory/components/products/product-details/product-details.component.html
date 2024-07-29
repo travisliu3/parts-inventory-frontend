@@ -1,0 +1,37 @@
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <mat-form-field *ngIf="editForm.get('id')?.value" appearance="fill">
+      <mat-label>Product ID</mat-label>
+      <input matInput formControlName="id" readonly />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Product name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Product price</mat-label>
+      <input matInput formControlName="price" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Product stock</mat-label>
+      <input matInput formControlName="stock" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Product min</mat-label>
+      <input matInput formControlName="min" />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Product max</mat-label>
+      <input matInput formControlName="max" />
+    </mat-form-field>
+  
+    <button mat-raised-button color="warn" type="button" (click)="onCancel()">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+  

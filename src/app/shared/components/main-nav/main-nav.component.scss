@@ -1,0 +1,44 @@
+@import "../../../../styles/abstracts/variables";
+@import "../../../../styles/abstracts/mixins";
+.security-header-logo {
+  height: 2rem;
+  cursor: pointer;
+}
+
+.header {
+  &__text {
+    @include security-fonts-common(400, $large-font-size);
+    padding: 0 10px;
+    text-transform: capitalize;
+    line-height: 100%;
+    margin-top: 10px;
+  }
+}
+
+.security-sidenav-container {
+  height: 100vh; /* Make sidenav container fill the full viewport height */
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 60vw;
+}
+
+.sub-header {
+  &__container {
+    padding: 1.5em 0;
+  }
+
+  &__title {
+    color: mat-color(primary);
+    font-family: $secondary-font-family, Times, serif;
+    @include security-fonts-common(600, $header-font-size);
+  }
+
+  &__sub-title {
+    @include security-fonts-common($medium-font-weight, 18px);
+  }
+}

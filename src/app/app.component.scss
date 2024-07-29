@@ -1,0 +1,35 @@
+@media all {
+  .positionSpinner {
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .positionSpinner {
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .positionSpinner {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .positionSpinner {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .positionSpinner {
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .positionSpinner {
+    height: 300px;
+  }
+}

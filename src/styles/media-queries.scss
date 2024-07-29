@@ -1,0 +1,85 @@
+/*
+Developer: Imtiaz Latif
+*/
+
+
+//mixin for common font properties
+@mixin security-fonts-common($font-weight, $font-size) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+}
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media (min-width: 1281px) {
+}
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+}
+
+/* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .header-text{
+    @include security-fonts-common(600, 16px);
+    margin-top: 6px;
+  }
+}
+
+/* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+ 
+}
+
+/* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .header-text{
+    @include security-fonts-common(600, 14px);
+    margin-top: 3px;
+  }
+ 
+}
+
+
+
+
+
+/* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+@media (min-width: 320px) and (max-width: 480px) {
+  .app-sub-header-title {
+    @include security-fonts-common(600, 28px);
+   
+  }
+       .app-sub-header-subtitle {
+        @include security-fonts-common(400, 14px);
+      }
+      .app-sub-header-info{
+        display: none;
+      }  
+      
+      .header-text{
+        display:none;
+      }
+      
+    
+}
