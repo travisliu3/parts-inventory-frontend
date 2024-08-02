@@ -105,4 +105,9 @@ export class PartDetailsComponent implements OnInit {
   onCancel() {
     this.router.navigate(['parts-inventory/parts']);
   }
+
+  deletePart() {
+    this.partsService.deletePart(this.editForm.value.id).subscribe();
+    this.router.navigate(['parts-inventory/parts']);
+  }
 }

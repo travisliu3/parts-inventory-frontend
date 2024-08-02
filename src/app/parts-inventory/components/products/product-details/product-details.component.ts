@@ -71,4 +71,9 @@ export class ProductDetailsComponent {
   onCancel() {
     this.router.navigate(['parts-inventory/products']);
   }
+
+  onDelete() {
+    this.productsService.deleteProduct(this.editForm.value.id).subscribe();
+    this.router.navigate(['parts-inventory/products']);
+  }
 }

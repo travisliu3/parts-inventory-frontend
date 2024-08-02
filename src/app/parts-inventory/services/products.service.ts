@@ -36,6 +36,12 @@ export class ProductsService {
     );
   }
 
+  deleteProduct(productId: string): Observable<Products> {
+    return this.http.delete<Products>(`${this.baseurl}/product/`+ productId).pipe(
+      catchError(this.handleError<Products>('getProducts', {} as Products)) // Return an empty object or default value
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`); // Log the error

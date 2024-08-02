@@ -24,26 +24,50 @@ export class PartsService {
     );
   }
 
-  registerNewPart(part : Parts): Observable<Parts> {
+  registerNewPart(part: Parts): Observable<Parts> {
     return this.http.post<Parts>(`${this.baseurl}/part`, part).pipe(
       catchError(this.handleError<Parts>('getParts', {} as Parts)) // Return an empty object or default value
     );
   }
 
-  registerNewInHousePart(part : Parts): Observable<Parts> {
-    return this.http.post<Parts>(`${this.baseurl}/part/inHouse`, part).pipe(
+  registerNewInHousePart(part: any): Observable<Parts> {
+    const inHouse = {
+      name: part.name,
+      price: part.price,
+      stock: part.stock,
+      min: part.min,
+      max: part.max,
+      machineId: part.machineId,
+    };
+    return this.http.post<Parts>(`${this.baseurl}/part/inHouse`, inHouse).pipe(
       catchError(this.handleError<Parts>('getInHouseParts', {} as Parts)) // Return an empty object or default value
     );
   }
 
-  registerNewOutsourcedPart(part : Parts): Observable<Parts> {
-    return this.http.post<Parts>(`${this.baseurl}/part/outsourced`, part).pipe(
-      catchError(this.handleError<Parts>('getOutsourcedParts', {} as Parts)) // Return an empty object or default value
+  registerNewOutsourcedPart(part: any): Observable<Parts> {
+    const outsourced = {
+      name: part.name,
+      price: part.price,
+      stock: part.stock,
+      min: part.min,
+      max: part.max,
+      companyName: part.companyName,
+    };
+    return this.http
+      .post<Parts>(`${this.baseurl}/part/outsourced`, outsourced)
+      .pipe(
+        catchError(this.handleError<Parts>('getOutsourcedParts', {} as Parts)) // Return an empty object or default value
+      );
+  }
+
+  updatePart(partId: string, part: Parts): Observable<Parts> {
+    return this.http.put<Parts>(`${this.baseurl}/part/` + partId, {}).pipe(
+      catchError(this.handleError<Parts>('getParts', {} as Parts)) // Return an empty object or default value
     );
   }
 
-  updatePart(partId: string, part : Parts): Observable<Parts> {
-    return this.http.put<Parts>(`${this.baseurl}/part/` + partId, {}).pipe(
+  deletePart(partId: string): Observable<Parts> {
+    return this.http.delete<Parts>(`${this.baseurl}/part/` + partId).pipe(
       catchError(this.handleError<Parts>('getParts', {} as Parts)) // Return an empty object or default value
     );
   }
