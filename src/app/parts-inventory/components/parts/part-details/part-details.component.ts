@@ -40,6 +40,18 @@ export class PartDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router
   ) {
+    this.editForm = this.fb.group({
+      id: [''],
+      max: [''],
+      min: [''],
+      name: [''],
+      price: [''],
+      stock: [''],
+      product: [''],
+      type: [''],
+      machineId: [''],
+      companyName: [''],
+    });
     const navigation = this.router.getCurrentNavigation();
     let rowData = navigation?.extras?.state?.['data'];
     this.productsService.getProducts().subscribe((data: any) => {
@@ -66,19 +78,6 @@ export class PartDetailsComponent implements OnInit {
           companyName: [rowData.companyName],
           product: [selectedProduct],
         });
-      } else {
-        this.editForm = this.fb.group({
-          id: [''],
-          max: [''],
-          min: [''],
-          name: [''],
-          price: [''],
-          stock: [''],
-          product: [''],
-          type: [''],
-          machineId: [''],
-          companyName: [''],
-        });
       }
     });
   }
@@ -90,14 +89,41 @@ export class PartDetailsComponent implements OnInit {
       this.partsService
         .registerNewInHousePart(this.editForm.value)
         .subscribe((data) => {
-          console.log(data);
-          this.router.navigate(['parts-inventory/parts']);
+          if (this.editForm.value.product?.id) {
+            this.partsService.getParts().subscribe((data: any) => {
+              const partId = data[data.length - 1].id;
+              this.partsService
+                .registerAssociatedProduct(
+                  this.editForm.value.product.id,
+                  partId
+                )
+                .subscribe(() => {
+                  this.router.navigate(['parts-inventory/parts']);
+                });
+            });
+          } else {
+            this.router.navigate(['parts-inventory/parts']);
+          }
         });
     } else if (this.editForm.value.type == 'Outsourced') {
       this.partsService
         .registerNewOutsourcedPart(this.editForm.value)
         .subscribe((data) => {
-          this.router.navigate(['parts-inventory/parts']);
+          if (this.editForm.value.product?.id) {
+            this.partsService.getParts().subscribe((data: any) => {
+              const partId = data[data.length - 1].id;
+              this.partsService
+                .registerAssociatedProduct(
+                  this.editForm.value.product.id,
+                  partId
+                )
+                .subscribe(() => {
+                  this.router.navigate(['parts-inventory/parts']);
+                });
+            });
+          } else {
+            this.router.navigate(['parts-inventory/parts']);
+          }
         });
     } else {
       this.partsService
@@ -106,14 +132,6 @@ export class PartDetailsComponent implements OnInit {
           this.router.navigate(['parts-inventory/parts']);
         });
     }
-    if (this.editForm.value.product.id) {
-      this.partsService
-        .registerAssociatedProduct(
-          this.editForm.value.product.id,
-          this.editForm.value.id
-        )
-        .subscribe();
-    }
   }
 
   onCancel() {
@@ -121,7 +139,8 @@ export class PartDetailsComponent implements OnInit {
   }
 
   deletePart() {
-    this.partsService.deletePart(this.editForm.value.id).subscribe();
-    this.router.navigate(['parts-inventory/parts']);
+    this.partsService.deletePart(this.editForm.value.id).subscribe(() => {
+      this.router.navigate(['parts-inventory/parts']);
+    });
   }
 }
