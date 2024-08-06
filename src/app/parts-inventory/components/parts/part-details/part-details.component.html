@@ -55,7 +55,7 @@
     <mat-label>Associated product name</mat-label>
     <mat-select formControlName="product">
       <mat-option *ngFor="let product of products" [value]="product">
-        {{ product }}
+        {{ product.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -64,5 +64,7 @@
     Cancel
   </button>
   <button mat-raised-button color="primary" type="submit">Submit</button>
-  <button mat-raised-button color="warn" type="button" (click)="deletePart()">Delete</button>
+  <button mat-raised-button color="warn" type="button" (click)="deletePart()">
+    Delete
+  </button>
 </form>

@@ -43,7 +43,15 @@ export class PartsService {
       catchError(this.handleError<Parts>('getInHouseParts', {} as Parts)) // Return an empty object or default value
     );
   }
-
+  registerAssociatedProduct(productId: any, partId: any): Observable<Parts> {
+    return this.http
+      .put<Parts>(`${this.baseurl}/product/` + productId + '/' + partId, {})
+      .pipe(
+        catchError(
+          this.handleError<Parts>('registerAssociatedProduct', {} as Parts)
+        ) // Return an empty object or default value
+      );
+  }
   registerNewOutsourcedPart(part: any): Observable<Parts> {
     const outsourced = {
       name: part.name,

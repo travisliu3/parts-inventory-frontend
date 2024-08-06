@@ -31,7 +31,7 @@ export class PartDetailsComponent implements OnInit {
     },
   };
   // type: string = 'ADD';
-  products = [''];
+  products: { id: any; name: string }[] = [];
   editForm!: FormGroup;
   constructor(
     private route: ActivatedRoute,
@@ -42,42 +42,48 @@ export class PartDetailsComponent implements OnInit {
   ) {
     const navigation = this.router.getCurrentNavigation();
     let rowData = navigation?.extras?.state?.['data'];
-    if (rowData) {
-      this.editForm = this.fb.group({
-        id: [rowData.part_id],
-        max: [rowData.part_max],
-        min: [rowData.part_min],
-        name: [rowData.part_name],
-        price: [rowData.part_price],
-        stock: [rowData.part_stock],
-        type: [rowData.machineId ? 'InHouse' : 'Outsourced'],
-        machineId: [rowData.machineId],
-        companyName: [rowData.companyName],
-        product: [rowData.product?.name],
-      });
-    } else {
-      this.editForm = this.fb.group({
-        id: [''],
-        max: [''],
-        min: [''],
-        name: [''],
-        price: [''],
-        stock: [''],
-        product: [''],
-        type: [''],
-        machineId: [''],
-        companyName: [''],
-      });
-    }
-  }
-
-  ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: any) => {
-      data.forEach((element: { name: string }) => {
-        this.products.push(element.name);
+      data.forEach((element: { id: any; name: string }) => {
+        this.products.push({ name: element.name, id: element.id });
       });
+
+      // Find the product to pre-select
+      const selectedProduct = this.products.find(
+        (product) => product.name === rowData.product?.name
+      );
+      console.log('Selected Product:', selectedProduct);
+
+      if (rowData) {
+        this.editForm = this.fb.group({
+          id: [rowData.part_id],
+          max: [rowData.part_max],
+          min: [rowData.part_min],
+          name: [rowData.part_name],
+          price: [rowData.part_price],
+          stock: [rowData.part_stock],
+          type: [rowData.machineId ? 'InHouse' : 'Outsourced'],
+          machineId: [rowData.machineId],
+          companyName: [rowData.companyName],
+          product: [selectedProduct],
+        });
+      } else {
+        this.editForm = this.fb.group({
+          id: [''],
+          max: [''],
+          min: [''],
+          name: [''],
+          price: [''],
+          stock: [''],
+          product: [''],
+          type: [''],
+          machineId: [''],
+          companyName: [''],
+        });
+      }
     });
   }
+
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.editForm.value.type == 'InHouse') {
@@ -99,6 +105,14 @@ export class PartDetailsComponent implements OnInit {
         .subscribe((data) => {
           this.router.navigate(['parts-inventory/parts']);
         });
+    }
+    if (this.editForm.value.product.id) {
+      this.partsService
+        .registerAssociatedProduct(
+          this.editForm.value.product.id,
+          this.editForm.value.id
+        )
+        .subscribe();
     }
   }
 
